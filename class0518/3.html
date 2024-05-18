@@ -9,30 +9,33 @@
     <div id="app">
       <button @click="reduce">-</button>
       {{res}}
-      <button @click="add">+</button><br />
-      總價:{{parse()}} 美金:{{usa()}}
+      <button @click="add">+</button>
+      <br />
+      總價：{{ parse() }} 美金：{{ parseDollar() }}
     </div>
     <script src="https://unpkg.com/vue"></script>
 
     <script>
-      console.log(Vue);
-      const app = Vue.createApp({
+      Vue.createApp({
         data() {
           return {
             res: 0,
             count: 1,
             price: 100,
-            dollar: 0,
+            total: 0,
           };
         },
         methods: {
-          parse() {
-            // console.log("adsadds");
-            return 100 * this.res;
+          parseDollar() {
+            // 錯誤寫法->以後用computed
+            return this.total / 30;
           },
-          usa() {
-            // console.log("adsadds");
-            return 30 * this.price;
+          parse() {
+            // 半正確寫法
+            // return this.price * this.res
+            // 錯誤寫法
+            this.total = this.price * this.res;
+            return this.total;
           },
 
           add() {
